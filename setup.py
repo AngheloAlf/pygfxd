@@ -55,5 +55,5 @@ setup(
             ],
         ),
     ],
-    cmdclass={'build_ext': build_ext},
+    # cmdclass={'build_ext': build_ext},
 )
