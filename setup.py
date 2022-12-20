@@ -3,6 +3,7 @@
 #  copied from https://stackoverflow.com/questions/4529555/building-a-ctypes-based-c-library-with-distutils
 from setuptools import setup, Extension
 from distutils.command.build_ext import build_ext as build_ext_orig
+import os
 
 
 class CTypesExtension(Extension):
@@ -21,7 +22,9 @@ class build_ext(build_ext_orig):
 
     def get_ext_filename(self, ext_name):
         if self._ctypes:
-            return ext_name + '.so'
+            if os.name == 'nt':
+                return f"{ext_name}.pyd"
+            return f"{ext_name}.so"
         return super().get_ext_filename(ext_name)
 
 with open("README.md", "r", encoding="utf-8") as fh:
